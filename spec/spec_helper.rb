@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../lib/renren-api')
+require File.expand_path(File.dirname(__FILE__) + '/../lib/polar')
 
-require "renren-api"
+require "polar"
 require "json"
 require "net/http"
 require "zlib"

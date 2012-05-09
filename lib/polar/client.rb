@@ -56,7 +56,7 @@ module Polar
     end
 
     def request(params, http_method)
-      conn = Faraday.new(:url => RenrenAPI::BASE_URL) do |c|
+      conn = Faraday.new(:url => Polar::BASE_URL) do |c|
         c.use Faraday::Request::UrlEncoded
         c.use Faraday::Response::Logger
         c.use Faraday::Adapter::NetHttp

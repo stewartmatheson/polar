@@ -3,7 +3,7 @@
 require 'core_ext/hash'
 require 'polar/signature_calculator'
 require 'polar/authentication'
-require 'polar/http_adapter'
+require 'polar/client'
 require 'polar/error/http_error'
 require 'polar/error/api_error'
 

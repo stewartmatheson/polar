@@ -6,12 +6,12 @@ class Rack::MockResponse
   end
 end
 
-describe RenrenAPI::Authentication do
+describe Polar::Authentication do
   include Rack::Test::Methods
   include Helpers
 
   def app
-    RenrenAPI::Authentication.new(lambda { |env| [200, {}, ["OK"]] }, "8802f8e9b2cf4eb993e8c8adb1e02b06", "34d3d1e26cd44c05a0c450c0a0f8147b") do |env|
+    Polar::Authentication.new(lambda { |env| [200, {}, ["OK"]] }, "8802f8e9b2cf4eb993e8c8adb1e02b06", "34d3d1e26cd44c05a0c450c0a0f8147b") do |env|
       [401, {}, ["Get out of #{env["PATH_INFO"]}!"]]
     end
   end
@@ -89,11 +89,11 @@ describe RenrenAPI::Authentication do
 
 end
 
-describe RenrenAPI::Authentication, "no failed handler is provided" do
+describe Polar::Authentication, "no failed handler is provided" do
   include Rack::Test::Methods
   include Helpers
   def app
-    RenrenAPI::Authentication.new(lambda { |env| [200, {}, ["OK"]] }, "8802f8e9b2cf4eb993e8c8adb1e02b06", "34d3d1e26cd44c05a0c450c0a0f8147b")
+    Polar::Authentication.new(lambda { |env| [200, {}, ["OK"]] }, "8802f8e9b2cf4eb993e8c8adb1e02b06", "34d3d1e26cd44c05a0c450c0a0f8147b")
   end
   subject { request(path, @env); last_response }
   before { @env = {} }

@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe RenrenAPI::SignatureCalculator do
-  let(:calculator) { RenrenAPI::SignatureCalculator.new(secret_key) }
+describe Polar::SignatureCalculator do
+  let(:calculator) { Polar::SignatureCalculator.new(secret_key) }
   describe "#calculate" do
     subject { calculator.calculate(hash) }
     context "when secret_key is 7fbf9791036749cb82e74efd62e9eb38" do

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe RenrenAPI::HTTPAdapter, "#get_friends" do
+describe Polar::Client, "#get_friends" do
   let(:api_key) { "f336414ab20d4073ae1bebd4ababdda0" }
   let(:secret_key) { "9f92400b4d4a460490ce96c6e651708b" }
   let(:session_key) { "6.8055532368b87a88194b185f79309596.2592000.1339192800-449545842" }
@@ -9,7 +9,7 @@ describe RenrenAPI::HTTPAdapter, "#get_friends" do
   it { should == result }
 end
 
-describe RenrenAPI::HTTPAdapter, "#get_info" do
+describe Polar::Client, "#get_info" do
   let(:api_key) { "f336414ab20d4073ae1bebd4ababdda0" }
   let(:secret_key) { "9f92400b4d4a460490ce96c6e651708b" }
   let(:session_key) { "191351|6.b5fac2f430600263d1f5ea46d622eb69.2592000.1339128000-458912501" }
@@ -27,7 +27,7 @@ describe RenrenAPI::HTTPAdapter, "#get_info" do
   it { should == result }
 end
 
-describe RenrenAPI::HTTPAdapter, "#send_notification" do
+describe Polar::Client, "#send_notification" do
   subject { described_class.new(api_key, secret_key, session_key).send_notification(receiver_ids, notification) }
   let(:http) { Net::HTTP.new("api.renren.com") }
   let(:api_key) { "8802f8e9b2cf4eb993e8c8adb1e02b06" }
@@ -64,7 +64,7 @@ describe RenrenAPI::HTTPAdapter, "#send_notification" do
   end
   
   let(:form_params) do
-    signature_calculator = RenrenAPI::SignatureCalculator.new(secret_key)
+    signature_calculator = Polar::SignatureCalculator.new(secret_key)
     signature = signature_calculator.calculate(params)
     URI.encode_www_form(params.merge(:sig => signature))
   end
@@ -82,7 +82,7 @@ describe RenrenAPI::HTTPAdapter, "#send_notification" do
   it { should == result }
 end
 
-describe RenrenAPI::HTTPAdapter, "#status_set" do
+describe Polar::Client, "#status_set" do
   subject { described_class.new(api_key, secret_key, session_key).set_status(status) }
   let(:http) { Net::HTTP.new("api.renren.com") }
   let(:api_key) { "8802f8e9b2cf4eb993e8c8adb1e02b06" }
@@ -118,7 +118,7 @@ describe RenrenAPI::HTTPAdapter, "#status_set" do
   end
   
   let(:form_params) do
-    signature_calculator = RenrenAPI::SignatureCalculator.new(secret_key)
+    signature_calculator = Polar::SignatureCalculator.new(secret_key)
     signature = signature_calculator.calculate(params)
     URI.encode_www_form(params.merge(:sig => signature))
   end
