@@ -1,19 +1,26 @@
 require "spec_helper"
 
 describe Polar::Client, "#get_friends" do
-  let(:api_key) { "f336414ab20d4073ae1bebd4ababdda0" }
-  let(:secret_key) { "9f92400b4d4a460490ce96c6e651708b" }
-  let(:session_key) { "6.8055532368b87a88194b185f79309596.2592000.1339192800-449545842" }
+  let(:api_key) { "api_key" }
+  let(:secret_key) { "secret_key" }
+  let(:session_key) { "session_key" }
   subject { described_class.new(api_key, secret_key, session_key).get_friends }
+  before { RenrenStubs::GetFriends.new }
 
-  it { should == result }
+  it do 
+    subject.class.should eql Array
+    subject.first.class.should eql Polar::User
+    subject.first.avatar.should eql "http://hdn.xnimg.cn/photos/hdn521/20120508/0915/h_tiny_768l_5f460007d2ae2f75.jpg"
+    subject.first.to_h["avatar"].should eql "http://hdn.xnimg.cn/photos/hdn521/20120508/0915/h_tiny_768l_5f460007d2ae2f75.jpg"
+  end
 end
 
 describe Polar::Client, "#get_info" do
   let(:api_key) { "f336414ab20d4073ae1bebd4ababdda0" }
   let(:secret_key) { "9f92400b4d4a460490ce96c6e651708b" }
-  let(:session_key) { "191351|6.b5fac2f430600263d1f5ea46d622eb69.2592000.1339128000-458912501" }
-
+  let(:session_key) { "6.b5fac2f430600263d1f5ea46d622eb69.2592000.1339128000-458912501" }
+  subject { described_class.new(api_key, secret_key, session_key).get_info(uids, fields) }
+  #before { RenrenStubs::GetUser.new }
 
   let(:fields) do
     %w{uid name tinyurl}
@@ -23,8 +30,10 @@ describe Polar::Client, "#get_info" do
     [449545842]
   end
 
-  subject { described_class.new(api_key, secret_key, session_key).get_info(uids, fields) }
-  it { should == result }
+  it do
+    subject.class.should eql Polar::User 
+    subject.avatar.should eql "http://hdn.xnimg.cn/photos/hdn521/20120508/0915/h_tiny_768l_5f460007d2ae2f75.jpg"
+  end
 end
 
 describe Polar::Client, "#send_notification" do

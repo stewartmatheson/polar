@@ -1,14 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + '/../lib/polar')
 
-require "polar"
 require "json"
 require "net/http"
 require "zlib"
 require "stringio"
 require "uuidtools"
 require "digest/md5"
-require "rack/test"
+require 'rack/test'
 require 'ruby-debug'
+#require 'webmock'
+#require 'webmock/rspec'
+
+require "polar"
+#require "stub_manager"
 
 module Helpers
   def generate_hash(secret_key, api_key, hash = {})
@@ -20,3 +24,4 @@ module Helpers
     generate_hash(secret_key, api_key, hash).collect { |(k, v)| "#{k}=#{v}" }
   end
 end
+

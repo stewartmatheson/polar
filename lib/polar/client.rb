@@ -17,7 +17,10 @@ module Polar
         :method => "friends.getFriends",
         :v => "1.0"
       }
-      request(params, :post)
+
+      friend_list = []
+      request(params).each { |current_user| friend_list << Polar::User.new(current_user) }
+      friend_list
     end
 
     def get_info(uids, fields)
@@ -27,7 +30,15 @@ module Polar
         :fields => fields * ",",
         :uids => uids * ","
       }
-      request(params, :get)
+      
+      user_info =  request(params)
+      if user_info.count == 1 
+        return Polar::User.new(user_info.first)
+      else
+        friend_list = []
+        request(params).each { |current_user| friend_list << Polar::User.new(current_user) }
+        return friend_list
+      end
     end
 
     def send_notification(receiver_ids, notification)
@@ -55,21 +66,20 @@ module Polar
       "%.3f" % Time.now.to_f
     end
 
-    def request(params, http_method)
+    def request(params)
       conn = Faraday.new(:url => Polar::BASE_URL) do |c|
         c.use Faraday::Request::UrlEncoded
         c.use Faraday::Response::Logger
         c.use Faraday::Adapter::NetHttp
       end
 
+      debugger
       conn.headers["Content-Type"] = ["application/x-www-form-urlencoded"];
-      signature_calculator = SignatureCalculator.new(@secret_key)
-
       params[:api_key] = @api_key
       params[:call_id] = Time.now.to_i 
       params[:session_key] = @session_key
       params[:format] = "JSON"
-      params[:sig] = signature_calculator.calculate(params)
+      params[:sig] = SignatureCalculator.new(@secret_key).calculate(params)
 
       response = conn.post do |request|
         request.body = urlencode_params(params)
