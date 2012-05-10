@@ -1,6 +1,5 @@
 # encoding: UTF-8
 
-require 'core_ext/hash'
 require 'polar/signature_calculator'
 require 'polar/authentication'
 require 'polar/client'

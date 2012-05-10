@@ -72,7 +72,7 @@ module Polar
       params[:sig] = signature_calculator.calculate(params)
 
       response = conn.post do |request|
-        request.body = params.to_query
+        request.body = urlencode_params(params)
       end
 
       raise RenrenAPI::Error::HTTPError.new(response.status) if (400..599).include?(response.status)
@@ -84,6 +84,32 @@ module Polar
     def renren_api_error?(response_body)
       return false if response_body.class == Array 
       response_body.has_key?("error_code") && response_body.has_key?("error_msg")
+    end
+
+    def urlencode_params(params_hash)
+      params = ''
+      stack = []
+
+      params_hash.each do |k, v|
+        if v.is_a?(Hash)
+          stack << [k,v]
+        else
+          params << "#{k}=#{v}&"
+        end
+      end
+
+      stack.each do |parent, hash|
+        hash.each do |k, v|
+          if v.is_a?(Hash)
+            stack << ["#{parent}[#{k}]", v]
+          else
+            params << "#{parent}[#{k}]=#{v}&"
+          end
+        end
+      end
+
+      params.chop! # trailing &
+      params
     end
 
   end
