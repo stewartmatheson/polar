@@ -41,16 +41,6 @@ module Polar
       end
     end
 
-    def send_notification(receiver_ids, notification)
-      params = {
-        :method => "notifications.send",
-        :v => "1.0",
-        :to_ids => receiver_ids * ",",
-        :notification => notification
-      }
-      request(params, :post)
-    end
-
     def set_status(status)
       params = {
         :method => "status.set",
@@ -73,7 +63,6 @@ module Polar
         c.use Faraday::Adapter::NetHttp
       end
 
-      debugger
       conn.headers["Content-Type"] = ["application/x-www-form-urlencoded"];
       params[:api_key] = @api_key
       params[:call_id] = Time.now.to_i 

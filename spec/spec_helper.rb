@@ -8,11 +8,11 @@ require "uuidtools"
 require "digest/md5"
 require 'rack/test'
 require 'ruby-debug'
-#require 'webmock'
-#require 'webmock/rspec'
+require 'webmock'
+require 'webmock/rspec'
 
 require "polar"
-#require "stub_manager"
+require "stub_manager"
 
 module Helpers
   def generate_hash(secret_key, api_key, hash = {})

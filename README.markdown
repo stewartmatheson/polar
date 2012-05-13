@@ -24,7 +24,22 @@ In polar you use the client object to interact with the api. To create the clien
 
 ```ruby
 client = Polar::Client.new(app_key, app_secret, session_key)
+
 ```
+Now that we have a client object we can query the renren api. To get all friends call the friends method of the client object.
+```ruby 
+friends = client.get_friends
+```
+Get friends will return an array of ```Polar::User``` objects. These objects have their data bound to dot methods so we can get information from them as follows
+```ruby
+friends.each do |friend|
+  puts friend.name
+end
+```
+
+### Pull Requests
+The changes are that what you want to do with the API is not supported. Let me know if that is the case and I will add support for anything you need to do. I will also accept any pull requests with new features included.
+
 
 License
 ===================
