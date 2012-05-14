@@ -1,6 +1,8 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
 require 'rspec/core/rake_task'
+require 'polar'
 GEM_NAME = "polar"
+GEM_VERSION = Polar.version
 
 desc 'Default: run specs.'
 task :default => :spec
@@ -22,8 +24,8 @@ end
  
 desc "Release to ruby gems"
 task :release => :build do
-  system "gem push #{GEM_NAME}-#{RenrenAPI::VERSION}.gem"
-  system "rm #{GEM_NAME}-#{RenrenAPI::VERSION}.gem"
+  system "gem push #{GEM_NAME}-#{GEM_VERSION}.gem"
+  system "rm #{GEM_NAME}-#{GEM_VERSION}.gem"
 end
 
 desc "Open an irb session preloaded with this library"
