@@ -5,6 +5,7 @@ require 'polar/authentication'
 require 'polar/base'
 require 'polar/user'
 require 'polar/client'
+require 'polar/response'
 require 'polar/error/http_error'
 require 'polar/error/api_error'
 

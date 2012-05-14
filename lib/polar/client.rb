@@ -36,7 +36,7 @@ module Polar
         return Polar::User.new(user_info.first)
       else
         friend_list = []
-        request(params).each { |current_user| friend_list << Polar::User.new(current_user) }
+        user_info.each { |current_user| friend_list << Polar::User.new(current_user) }
         return friend_list
       end
     end
@@ -47,7 +47,7 @@ module Polar
         :v => "1.0",
         :status => status
       }
-      request(params, :post)
+      Polar::Response.new request(params)
     end
 
     private
@@ -59,7 +59,6 @@ module Polar
     def request(params)
       conn = Faraday.new(:url => Polar::BASE_URL) do |c|
         c.use Faraday::Request::UrlEncoded
-        c.use Faraday::Response::Logger
         c.use Faraday::Adapter::NetHttp
       end
 
@@ -73,7 +72,7 @@ module Polar
       response = conn.post do |request|
         request.body = urlencode_params(params)
       end
-
+      
       raise RenrenAPI::Error::HTTPError.new(response.status) if (400..599).include?(response.status)
       parsed_response = JSON.parse(response.body)
       raise RenrenAPI::Error::APIError.new(parsed_response) if renren_api_error?(parsed_response)

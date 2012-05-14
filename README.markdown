@@ -24,7 +24,6 @@ In polar you use the client object to interact with the api. To create the clien
 
 ```ruby
 client = Polar::Client.new(app_key, app_secret, session_key)
-
 ```
 Now that we have a client object we can query the renren api. To get all friends call the friends method of the client object.
 ```ruby 
@@ -37,9 +36,20 @@ friends.each do |friend|
 end
 ```
 
+Renren's API for some end points will simply return a result = 1 when the operation is successful. Set status is one such endpoint. In this case if the API call does not raise an error then Polar will return an object of class ```Polar::Result```. This object will have success = true.
+
+```ruby
+client = Polar::Client.new(app_key, app_secret, session_key)
+result = client.set_status("Hey welcome to renren.")
+if(result.success)
+  puts "woo hoo. The gem works"
+else
+  puts "Gem dead. Give up"
+end
+```
+
 ### Pull Requests
 The changes are that what you want to do with the API is not supported. Let me know if that is the case and I will add support for anything you need to do. I will also accept any pull requests with new features included.
-
 
 License
 ===================

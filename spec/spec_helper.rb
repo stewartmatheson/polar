@@ -1,16 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../lib/polar')
 
-require "json"
-require "net/http"
-require "zlib"
-require "stringio"
-require "uuidtools"
-require "digest/md5"
 require 'rack/test'
 require 'ruby-debug'
 require 'webmock'
 require 'webmock/rspec'
-
 require "polar"
 require "stub_manager"
 

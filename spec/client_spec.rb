@@ -37,14 +37,17 @@ describe Polar::Client, "#get_info" do
 end
 
 describe Polar::Client, "#status_set" do
-  let(:api_key) { "f336414ab20d4073ae1bebd4ababdda0" }
-  let(:secret_key) { "9f92400b4d4a460490ce96c6e651708b" }
-  let(:session_key) { "6.b5fac2f430600263d1f5ea46d622eb69.2592000.1339128000-458912501" }
+  let(:api_key) { "api_key" }
+  let(:secret_key) { "secret_key" }
+  let(:session_key) { "session_key" }
+
   let(:status) { "Hello, how are you toady?" }
+  before { RenrenStubs::SetStatus.new }
 
   subject { described_class.new(api_key, secret_key, session_key).set_status(status) }
   
   it do
-    subject.result.should eql true
+    subject.class.should eql Polar::Response
+    subject.success.should eql true
   end
 end
