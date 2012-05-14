@@ -4,6 +4,7 @@ describe Polar::Client, "#get_friends" do
   let(:api_key) { "api_key" }
   let(:secret_key) { "secret_key" }
   let(:session_key) { "session_key" }
+  
   subject { described_class.new(api_key, secret_key, session_key).get_friends }
   before { RenrenStubs::GetFriends.new }
 

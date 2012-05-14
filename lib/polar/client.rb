@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require "zlib"
+#require "zlib"
 require "json"
 require "faraday"
 require "faraday_middleware"
@@ -72,7 +72,7 @@ module Polar
       response = conn.post do |request|
         request.body = urlencode_params(params)
       end
-      
+
       raise RenrenAPI::Error::HTTPError.new(response.status) if (400..599).include?(response.status)
       parsed_response = JSON.parse(response.body)
       raise RenrenAPI::Error::APIError.new(parsed_response) if renren_api_error?(parsed_response)
