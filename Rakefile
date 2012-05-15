@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
 require 'rspec/core/rake_task'
 require 'polar'
+
 GEM_NAME = "polar"
 GEM_VERSION = Polar.version
 
