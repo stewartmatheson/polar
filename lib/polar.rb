@@ -2,6 +2,7 @@
 
 require 'polar/signature_calculator'
 require 'polar/authentication'
+require 'polar/request'
 require 'polar/base'
 require 'polar/user'
 require 'polar/client'
