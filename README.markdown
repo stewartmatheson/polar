@@ -48,6 +48,17 @@ else
 end
 ```
 
+Polar also supports cursors to iterate over pages of results. Next page returns true while there is a new set of results to iterate over.
+```ruby
+client = Polar::Client.new(app_key, app_secret, session_key)
+cursor = client.get_friends
+while cursor.next_page?
+  cursor.each do |user|
+    puts user.name
+  end
+end
+```
+
 ### Pull Requests
 The changes are that what you want to do with the API is not supported. Let me know if that is the case and I will add support for anything you need to do. I will also accept any pull requests with new features included.
 

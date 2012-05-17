@@ -3,7 +3,7 @@ module Stubs
   class GetLotsOfFriends < EndPointStub
 
     def initialize
-      @friends_per_page = 10
+      @friends_per_page = 50
       @pages = 5
       super
     end
