@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = "polar-renren"
-  spec.version = Polar::VERSION
+  spec.version = Polar.vesion
   spec.summary = "Polar is a wrapper around the Renren social network's restful api."
   spec.description = <<-EOF
   Polar is an API wrapper for the Renren social network.
