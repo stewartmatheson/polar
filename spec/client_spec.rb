@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require "spec_helper"
 
 describe Polar::Client, "#get_friends" do
@@ -6,10 +7,10 @@ describe Polar::Client, "#get_friends" do
   let(:session_key) { "session_key" }
   
   subject { described_class.new(api_key, secret_key, session_key).get_friends }
-  before { RenrenStubs::GetFriends.new }
+  before { Stubs::GetFriends.new }
 
   it do 
-    subject.class.should eql Array
+    subject.class.should eql Polar::Cursor
     subject.first.class.should eql Polar::User
     subject.first.avatar.should eql "http://hdn.xnimg.cn/photos/hdn521/20120508/0915/h_tiny_768l_5f460007d2ae2f75.jpg"
     subject.first.to_h["avatar"].should eql "http://hdn.xnimg.cn/photos/hdn521/20120508/0915/h_tiny_768l_5f460007d2ae2f75.jpg"
@@ -21,7 +22,7 @@ describe Polar::Client, "#get_info" do
   let(:secret_key) { "secret_key" }
   let(:session_key) { "session_key" }
   subject { described_class.new(api_key, secret_key, session_key).get_info(uids, fields) }
-  before { RenrenStubs::GetUser.new }
+  before { Stubs::GetUser.new }
 
   let(:fields) do
     %w{uid name tinyurl}
@@ -43,7 +44,7 @@ describe Polar::Client, "#status_set" do
   let(:session_key) { "session_key" }
 
   let(:status) { "Hello, how are you toady?" }
-  before { RenrenStubs::SetStatus.new }
+  before { Stubs::SetStatus.new }
 
   subject { described_class.new(api_key, secret_key, session_key).set_status(status) }
   

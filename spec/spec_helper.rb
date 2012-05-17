@@ -6,6 +6,10 @@ require 'webmock'
 require 'webmock/rspec'
 require "polar"
 require "stub_manager"
+require "timecop"
+
+#require each stub file
+Dir[File.dirname(__FILE__) + '/stubs/*'].each { |file| require file }
 
 module Helpers
   def generate_hash(secret_key, api_key, hash = {})

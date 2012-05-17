@@ -35,6 +35,7 @@ GEM
       ruby-debug-base19 (>= 0.11.19)
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
+    timecop (0.3.5)
     uuidtools (2.1.2)
     webmock (1.8.6)
       addressable (>= 2.2.7)
@@ -51,5 +52,6 @@ DEPENDENCIES
   rake
   rspec
   ruby-debug19
+  timecop
   uuidtools
   webmock

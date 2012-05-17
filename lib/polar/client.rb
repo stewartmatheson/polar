@@ -11,9 +11,7 @@ module Polar
         :v => "1.0"
       }
 
-      friend_list = []
-      request(params).each { |current_user| friend_list << Polar::User.new(current_user) }
-      friend_list
+      Polar::Cursor.new(@api_key, @secret_key, @session_key, Polar::User, params)
     end
 
     def get_info(uids, fields)

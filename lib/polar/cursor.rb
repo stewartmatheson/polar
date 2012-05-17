@@ -1,10 +1,10 @@
 module Polar
   class Cursor
     include Enumerable
-    ITEMS_PER_PAGE = 50
+    ITEMS_PER_PAGE = 500
 
     def initialize(api_key, secret_key, session_key, domain_klass, params)
-      @params, @api_key, @secret_key, @session_key, @domain_klass, @params  = api_key, secret_keym session_key, domain_klass, params
+      @api_key, @secret_key, @session_key, @domain_klass, @params = api_key, secret_key, session_key, domain_klass, params
       @current_page = 0
       @fetched_current_page = false
     end
@@ -18,7 +18,13 @@ module Polar
     end
 
     def next_page?
-      @items.count < ITEMS_PER_PAGE
+      if @items
+        return @items.count <= ITEMS_PER_PAGE
+      elsif !@items && @current_page == 0
+        return true
+      else
+        raise("Items are nil and they should not be.")
+      end
     end
 
     def total_items
@@ -33,18 +39,18 @@ module Polar
 
     private
 
-    def page_request
-      request = Polar::Request.new(params)
+    def page_request(params)
+      request = Polar::Request.new(@api_key, @secret_key, @session_key, params)
       request.response
     end
 
     def fetch_current_page
-      options = @options.merge({ :page => @current_page, :count => @items_per_page })
+      params = @params.merge({ :page => @current_page, :count => ITEMS_PER_PAGE })
       response = page_request(params)
 
       @items = []
-      response.each do |domain_object|
-        @items << @domain_object.new(domain_object)
+      response.each do |response_item|
+        @items << @domain_klass.new(response_item)
       end
       @fetched_current_page = true
     end
