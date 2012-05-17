@@ -2,7 +2,7 @@ $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
 require 'rspec/core/rake_task'
 require 'polar'
 
-GEM_NAME = "polar"
+GEM_NAME = "polar-renren"
 GEM_VERSION = Polar.version
 
 desc 'Default: run specs.'
@@ -31,5 +31,5 @@ end
 
 desc "Open an irb session preloaded with this library"
 task :console do
-  sh "irb -rubygems -I lib -r polar.rb"
+  sh "irb -rubygems -I lib -r #{GEM_NAME}.rb"
 end

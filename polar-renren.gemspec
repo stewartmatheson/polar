@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
-  spec.name = "Polar"
-  spec.version = "0.0.1"
+  spec.name = "polar-renren"
+  spec.version = Polar::VERSION
   spec.summary = "Polar is a wrapper around the Renren social network's restful api."
   spec.description = <<-EOF
   Polar is an API wrapper for the Renren social network.
@@ -14,4 +14,10 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/stewartmatheson/polar"
   spec.platform = Gem::Platform::RUBY
   spec.license = "BSD"
+
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "webmock"
+
+  spec.add_runtime_dependency "faraday", "~> 0.7.6"
+  spec.add_runtime_dependency "faraday_middleware"
 end
