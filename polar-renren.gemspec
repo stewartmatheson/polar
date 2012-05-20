@@ -1,6 +1,11 @@
+lib = File.expand_path('../lib/', __FILE__)
+$:.unshift lib unless $:.include?(lib)
+
+require 'polar'
+
 Gem::Specification.new do |spec|
   spec.name = "polar-renren"
-  spec.version = Polar.vesion
+  spec.version = Polar.version
   spec.summary = "Polar is a wrapper around the Renren social network's restful api."
   spec.description = <<-EOF
   Polar is an API wrapper for the Renren social network.

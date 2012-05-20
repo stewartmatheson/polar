@@ -27,9 +27,9 @@ module Polar
         request.body = urlencode_params(params)
       end
 
-      raise RenrenAPI::Error::HTTPError.new(raw_response.status) if (400..599).include?(raw_response.status)
+      raise Polar::Error::HTTPError.new(raw_response.status) if (400..599).include?(raw_response.status)
       @response = JSON.parse(raw_response.body)
-      raise RenrenAPI::Error::APIError.new(@response) if renren_api_error?
+      raise Polar::Error::APIError.new(@response) if renren_api_error?
     end
 
     private

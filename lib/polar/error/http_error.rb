@@ -1,4 +1,4 @@
-module RenrenAPI
+module Polar 
   module Error
     class HTTPError < StandardError
       def initialize(status)
