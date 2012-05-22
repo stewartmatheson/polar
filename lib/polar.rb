@@ -13,7 +13,7 @@ require 'polar/error/api_error'
 
 module Polar
   BASE_URL = "http://api.renren.com/restserver.do"
-  VERSION = [0, 0, 4]
+  VERSION = [0, 0, 5]
 
   def self.version
     VERSION * "."
