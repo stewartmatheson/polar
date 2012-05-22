@@ -1,7 +1,7 @@
 module Polar
   class Cursor
     include Enumerable
-    ITEMS_PER_PAGE = 500
+    ITEMS_PER_PAGE = 50
 
     def initialize(api_key, secret_key, session_key, domain_klass, params)
       @api_key, @secret_key, @session_key, @domain_klass, @params = api_key, secret_key, session_key, domain_klass, params
@@ -19,7 +19,7 @@ module Polar
 
     def next_page?
       if @items
-        return @items.count <= ITEMS_PER_PAGE
+        return @items.count >= ITEMS_PER_PAGE
       elsif !@items && @current_page == 0
         return true
       else
