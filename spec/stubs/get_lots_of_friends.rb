@@ -3,8 +3,8 @@ module Stubs
   class GetLotsOfFriends < EndPointStub
 
     def initialize
-      @friends_per_page = 50
-      @pages = 5
+      @friends_per_page = 500
+      @pages = 50
       super
     end
 
@@ -19,8 +19,7 @@ module Stubs
         response_collection << friend_structure
       end
 
-      response_body = JSON.generate(response_collection)
-      { :body => response_body }
+      JSON.generate(response_collection)
     end
 
     def with
@@ -42,16 +41,16 @@ module Stubs
       request_params = { 
         "method"         => "friends.getFriends",
         "v"              => "1.0",
-        "page"           => page_number,
-        "count"          => @friends_per_page,
+        "page"           => page_number.to_s,
+        "count"          => @friends_per_page.to_s,
         "api_key"        => "api_key",
-        "call_id"        => Time.now.to_i,
+        "call_id"        => Time.now.to_i.to_s,
         "session_key"    => "session_key", 
         "format"         => "JSON"
       } 
       
       request_params[:sig] = Polar::SignatureCalculator.new("secret_key").calculate(request_params)
-      urlencode_params(request_params)
+      request_params
     end
   end
 end

@@ -1,7 +1,7 @@
 module Polar
   class Cursor
     include Enumerable
-    ITEMS_PER_PAGE = 50
+    ITEMS_PER_PAGE = 500
 
     def initialize(api_key, secret_key, session_key, domain_klass, params)
       @api_key, @secret_key, @session_key, @domain_klass, @params = api_key, secret_key, session_key, domain_klass, params

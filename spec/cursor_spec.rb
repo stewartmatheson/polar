@@ -15,12 +15,15 @@ describe Polar::Cursor do
   it do
     subject.class.should eql Polar::Cursor
     
-    total_users = Array.new
+    total_users = []
     while subject.next_page?
       subject.each do |user|
        total_users << user 
       end
     end
-    total_users.count.should eql 500 * 50
+
+    #When we spec out pages we make the last page empty. Thats why this number is 499
+    total_users.count.should eql 49 * 500
+    
   end
 end
